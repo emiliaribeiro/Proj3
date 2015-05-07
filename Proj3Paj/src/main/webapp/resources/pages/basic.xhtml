@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="../css/calculator.css" />
+	<script src="../js/basic.js" />
+</h:head>
+
+<h:body>
+	<div id="container" class="ui-grid ui-grid-responsive">
+		<div class="ui-grid-row ">
+
+			<div class="ui-grid-col-2">
+				<p:panel class="est" id="horizontal" header="Estatística"
+					toggleable="true" toggleOrientation="horizontal">
+					<h:form>
+						<ul>
+							<ui:repeat value="#{estatistica.resultado}" var="item">
+								<li>#{item}</li>
+							</ui:repeat>
+						</ul>
+					</h:form>
+				</p:panel>
+			</div>
+
+
+			<div class="ui-grid-col-1"></div>
+
+			<div class="ui-grid-col-5">
+				<h:form>
+					<p:panelGrid style="width:480px">
+						<f:facet name="header">
+							<p:row>
+								<p:column colspan="5">
+									<p:selectOneRadio value="#{basica.panel1}">
+										<f:selectItem itemLabel="Básica" itemValue="false" />
+										<f:selectItem itemLabel="Científica" itemValue="true" />
+										<f:ajax render="scientific-panel" />
+									</p:selectOneRadio>
+									<h:inputHidden id="firstdigit" value="#{basica.firstdigit}" />
+									<h:inputTextarea id="basicdisplay"
+										styleClass="txtareabasicdisplay"
+										title="Preencha aqui a sua expressao matemática"
+										value="#{basica.display}" rows="2" cols="49" />
+								</p:column>
+							</p:row>
+						</f:facet>
+						<p:row>
+							<p:column>
+								<p:commandButton id="btn7" class="btn-numeric" type="button"
+									value="7" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn8" class="btn-numeric" type="button"
+									value="8" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn9" class="btn-numeric" type="button"
+									value="9" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btndivby" class="btn-numeric" type="button"
+									value="&#247;" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column rowspan="2">
+								<h:commandButton id="btnequal" styleClass="btn-numeric"
+									type="submit" value="=">
+									<f:ajax execute="btnequal"
+										actionlistener="#{basica.btnequal()}" render="basicdisplay" />
+								</h:commandButton>
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:commandButton id="btn4" class="btn-numeric" type="button"
+									value="4" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn5" class="btn-numeric" type="button"
+									value="5" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn6" class="btn-numeric" type="button"
+									value="6" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btntimes" class="btn-numeric" type="button"
+									value="&#215;" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:commandButton id="btn1" class="btn-numeric" type="button"
+									value="1" actionlistener="#{basica.keyAdd}" />
+								<!-- 	<f:ajax execute="btn1" render="basicdisplay" /> -->
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn2" class="btn-numeric" type="button"
+									value="2" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btn3" class="btn-numeric" type="button"
+									value="3" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btnminus" class="btn-numeric" type="button"
+									value="-" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column rowspan="2">
+								<h:commandButton id="btnclear" class="btn-numeric" type="button"
+									value="C" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column>
+								<p:commandButton id="btn0" class="btn-numeric" type="button"
+									value="0" actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+							</p:column>
+							<p:column>
+								<p:commandButton id="btncoma" class="btn-numeric" type="button"
+									value="." actionlistener="#{basica.keyAdd}" />
+							</p:column>
+							<p:column>
+								<p:commandButton id="btnplus" class="btn-numeric" type="button"
+									value="+" oactionlistener="#{basica.keyAdd}" />
+							</p:column>
+						</p:row>
+					</p:panelGrid>
+					<h:panelGroup id="scientific-panel">
+						<p:panelGrid rendered="#{basica.panel1 == 'true'}"
+							style="width:480px">
+						
+							<p:row>
+								<p:column>
+									<p:commandButton id="btnopen" class="btn-numeric" type="button"
+										value="(" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnclose" class="btn-numeric"
+										type="button" value=")" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnabs" class="btn-numeric" type="button"
+										value="abs" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnacos" class="btn-numeric" type="button"
+										value="acos" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnasin" class="btn-numeric" type="button"
+										value="asin" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<p:commandButton id="btnatan" class="btn-numeric" type="button"
+										value="atan" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btncbrt" class="btn-numeric" type="button"
+										value="3 &#8730;x" actionlistener="#{basica.keyAdd}" />
+
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnceil" class="btn-numeric" type="button"
+										value="ceil" actionlistener="#{basica.keyAdd}" />
+
+								</p:column>
+								<p:column>
+									<p:commandButton id="btncos" class="btn-numeric" type="button"
+										value="cos" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btncosh" class="btn-numeric" type="button"
+										value="cosh" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+							</p:row>
+
+							<p:row>
+								<p:column>
+									<p:commandButton id="btnexp" class="btn-numeric" type="button"
+										value="exp" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnfloor" class="btn-numeric" type="button"
+										value="floor" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnlog" class="btn-numeric" type="button"
+										value="log" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnlog10" class="btn-numeric" type="button"
+										value="log10" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnlog2" class="btn-numeric" type="button"
+										value="log2" actionlistener="#({basica.keyAdd}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column>
+									<p:commandButton id="btnsin" class="btn-numeric" type="button"
+										value="sin" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnsinh" class="btn-numeric" type="button"
+										value="sinh" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btnsqrt" class="btn-numeric" type="button"
+										value="&#8730;" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btntan" class="btn-numeric" type="button"
+										value="tan" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								<p:column>
+									<p:commandButton id="btntanh" class="btn-numeric" type="button"
+										value="tanh" actionlistener="#{basica.keyAdd}" />
+								</p:column>
+								</p:row>
+								<p:row>
+									<p:column>
+										<p:commandButton id="btnfact" class="btn-numeric" type="button"
+											value="!" actionlistener="#{basica.keyAdd}" />
+									</p:column>
+									<p:column>
+										<p:commandButton id="btn-x-power-y" class="btn-numeric"
+											type="button" value="x&#696;"
+											actionlistener="#{basica.keyAdd}" />
+									</p:column>
+									<p:column>
+									</p:column>
+									<p:column>
+										<p:commandButton id="btn-x-root-y" class="btn-numeric"
+											type="button" value="&#696;&#8730;x"
+											actionlistener="#{basica.keyAdd}" />
+									</p:column>
+									<p:column>
+										<p:commandButton id="btnpi" class="btn-numeric" type="button"
+											value="&#960;" actionlistener="#{basica.keyAdd}" />
+									</p:column>
+								</p:row>
+									<p:row>
+								<p:column colspan="5">
+									<p:selectOneRadio value="#{basica.btnradio}">
+										<f:selectItem itemLabel="Radianos" itemValue="rad" />
+										<f:selectItem itemLabel="Graus" itemValue="deg" />
+									</p:selectOneRadio>
+								</p:column>
+							</p:row>
+						</p:panelGrid>
+					</h:panelGroup>
+				</h:form>
+			</div>
+
+			<div class="ui-grid-col-1"></div>
+			<div class="ui-grid-col-3" id="painelHist">
+
+				<p:panel id="basic" header="Histórico de Operações"
+					footer="Clique na expressão para reutilizar"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="4" cellpadding="10">
+
+						<h:form>
+							<ul id="hist">
+								<ui:repeat value="#{pickListView.hist}" var="item">
+									<li>#{item}</li>
+								</ui:repeat>
+							</ul>
+						</h:form>
+					</h:panelGrid>
+				</p:panel>
+			</div>
+
+		</div>
+	</div>
+
+</h:body>
+<footer> Projecto2 de PAJ realizado por Emília Ribeiro e Filipa
+	Pedrosa </footer>
+</html>
