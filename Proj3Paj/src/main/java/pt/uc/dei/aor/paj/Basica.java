@@ -23,12 +23,22 @@ public class Basica implements Serializable {
 	private String btnradio;
 	private String resultado;
 	private String txt;
-
+	private String panel1;
+	
 	public Basica() {
 		this.display = "0";
 		this.resultado = "0";
 		this.firstdigit = "true";
 		this.btnradio = "rad";
+		this.panel1="false";
+	}
+
+	public String getPanel1() {
+		return panel1;
+	}
+
+	public void setPanel1(String panel1) {
+		this.panel1 = panel1;
 	}
 
 	//obtem o valor seleccionado no botao e apresenta no ecra
@@ -185,7 +195,7 @@ public class Basica implements Serializable {
 			this.display+=txt;
 			break;
 		case "btnsin":
-			
+
 			if (this.btnradio=="rad")
 				txt = "sin(";
 			else
@@ -265,23 +275,31 @@ public class Basica implements Serializable {
 	//função de interface entre o cliente e o servidor
 	public void btnequal() {
 		String aux, aux3;
-			
+
 		//envia o valor da expressão introduzida para efectuar o calculo
 		calc.setExp(this.display);
 		//o resultado toma o valor devolvido após calculo da expressao
 		this.resultado=calc.getExp();
-		
+
 
 		if (calc.isExpValida()){
-		//envia o valor da expressão introduzida para o historico
-		pickHist.init(this.display);
-		//envio para os dados estatisticos
-		setValor(this.display);
+			//envia o valor da expressão introduzida para o historico
+			pickHist.init(this.display);
+			//envio para os dados estatisticos
+			setValor(this.display);
 		} else{
-		//envia o valor da expressão introduzida para o historico mas nao contabiliza na estatistica
+			//envia o valor da expressão introduzida para o historico mas nao contabiliza na estatistica
 			pickHist.init(this.display);
 		}
-		
+
 		this.setFirstdigit("true");
+	}
+
+	public String getDisplay() {
+		return display;
+	}
+
+	public void setDisplay(String display) {
+		this.display = display;
 	}
 }

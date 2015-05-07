@@ -33,10 +33,10 @@
 
 			<div class="ui-grid-col-5">
 				<h:form>
-					<p:panelGrid style="width:480px">
+					<p:panelGrid style="width:450px" styleClass="table">
 						<f:facet name="header">
 							<p:row>
-								<p:column colspan="5">
+								<p:column colspan="5" style="width:90px">
 									<p:selectOneRadio value="#{basica.panel1}">
 										<f:selectItem itemLabel="Básica" itemValue="false" />
 										<f:selectItem itemLabel="Científica" itemValue="true" />
@@ -51,24 +51,24 @@
 							</p:row>
 						</f:facet>
 						<p:row>
-							<p:column>
+							<p:column style="width:90px">
 								<p:commandButton id="btn7" class="btn-numeric" type="button"
 									value="7" actionlistener="#{basica.keyAdd}" />
 							</p:column>
-							<p:column>
+							<p:column style="width:90px">
 								<p:commandButton id="btn8" class="btn-numeric" type="button"
 									value="8" actionlistener="#{basica.keyAdd}" />
 							</p:column>
-							<p:column>
+							<p:column style="width:90px">
 								<p:commandButton id="btn9" class="btn-numeric" type="button"
 									value="9" actionlistener="#{basica.keyAdd}" />
 							</p:column>
-							<p:column>
+							<p:column style="width:90px">
 								<p:commandButton id="btndivby" class="btn-numeric" type="button"
 									value="&#247;" actionlistener="#{basica.keyAdd}" />
 							</p:column>
-							<p:column rowspan="2">
-								<h:commandButton id="btnequal" styleClass="btn-numeric"
+							<p:column rowspan="2" style="width:90px">
+								<h:commandButton id="btnequal" class="btn-side"
 									type="submit" value="=">
 									<f:ajax execute="btnequal"
 										actionlistener="#{basica.btnequal()}" render="basicdisplay" />
@@ -112,7 +112,7 @@
 									value="-" actionlistener="#{basica.keyAdd}" />
 							</p:column>
 							<p:column rowspan="2">
-								<h:commandButton id="btnclear" class="btn-numeric" type="button"
+								<h:commandButton id="btnclear" class="btn-side" type="button"
 									value="C" actionlistener="#{basica.keyAdd}" />
 							</p:column>
 						</p:row>
@@ -135,26 +135,26 @@
 					</p:panelGrid>
 					<h:panelGroup id="scientific-panel">
 						<p:panelGrid rendered="#{basica.panel1 == 'true'}"
-							style="width:480px">
+							style="width:450px">
 						
 							<p:row>
-								<p:column>
+								<p:column style="width:90px">
 									<p:commandButton id="btnopen" class="btn-numeric" type="button"
 										value="(" actionlistener="#{basica.keyAdd}" />
 								</p:column>
-								<p:column>
+								<p:column style="width:90px">
 									<p:commandButton id="btnclose" class="btn-numeric"
 										type="button" value=")" actionlistener="#{basica.keyAdd}" />
 								</p:column>
-								<p:column>
+								<p:column style="width:90px">
 									<p:commandButton id="btnabs" class="btn-numeric" type="button"
 										value="abs" actionlistener="#{basica.keyAdd}" />
 								</p:column>
-								<p:column>
+								<p:column style="width:90px">
 									<p:commandButton id="btnacos" class="btn-numeric" type="button"
 										value="acos" actionlistener="#{basica.keyAdd}" />
 								</p:column>
-								<p:column>
+								<p:column style="width:90px">
 									<p:commandButton id="btnasin" class="btn-numeric" type="button"
 										value="asin" actionlistener="#{basica.keyAdd}" />
 								</p:column>
@@ -289,3 +289,4 @@
 <footer> Projecto2 de PAJ realizado por Emília Ribeiro e Filipa
 	Pedrosa </footer>
 </html>
+
