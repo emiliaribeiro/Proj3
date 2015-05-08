@@ -187,7 +187,6 @@ public class Basica implements Serializable {
 			this.display+=txt;
 			break;
 		case "btnsin":
-
 			if (this.btnradio=="rad")
 				txt = "sin(";
 			else
@@ -260,7 +259,7 @@ public class Basica implements Serializable {
 			this.display="";
 			break;
 		}
-		this.txt=txt;
+		
 	}
 
 	//função de interface entre o cliente e o servidor
@@ -271,7 +270,7 @@ public class Basica implements Serializable {
 		calc.setExp(this.display);
 		//o resultado toma o valor devolvido após calculo da expressao
 		this.resultado=calc.getExp();
-
+		this.display=this.resultado;
 
 		if (calc.isExpValida()){
 			//envia o valor da expressão introduzida para o historico
