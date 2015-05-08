@@ -98,7 +98,17 @@ body{
 	padding: 20px;
 	height:auto;
 	border-radius:30px;
+/* 	position:relative; */
 }
+
+#cientific{
+	position:left;
+}
+
+#normal{
+	position:right;
+}
+
 
 
 .btns a, .btns button, .btns p {
