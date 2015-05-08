@@ -1,14 +1,13 @@
 package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
-
-import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ActionEvent;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named 
-@RequestScoped
+@SessionScoped
 public class Basica implements Serializable {
 
 	private static final long serialVersionUID = 3730437403554200689L;
@@ -26,11 +25,11 @@ public class Basica implements Serializable {
 	private String panel1;
 	
 	public Basica() {
-		this.display = "0";
+		this.display = "";
 		this.resultado = "0";
-		this.firstdigit = "true";
 		this.btnradio = "rad";
 		this.panel1="false";
+		this.txt="";
 	}
 
 	public String getPanel1() {
@@ -56,14 +55,6 @@ public class Basica implements Serializable {
 		est.setResultado(display);
 	} 
 
-	//Getter e Setter do valor associado ao primeiro digito da expressão
-	public String getFirstdigit() {
-		return firstdigit;
-	}
-	public void setFirstdigit(String firstdigit) {
-		this.firstdigit = firstdigit;
-	}
-
 	//Getter e Setter associados à variável graus/radianos
 	public String getBtnradio() {
 		return btnradio;
@@ -73,8 +64,8 @@ public class Basica implements Serializable {
 	}
 
 	//botoes com ajax
-	public void keyAdd(ActionEvent event) {
-		String txt = "";
+	public void keyAdd(AjaxBehaviorEvent event) {
+
 
 		switch (event.getComponent().getId()) {
 
@@ -92,6 +83,7 @@ public class Basica implements Serializable {
 			break;
 		case "btn3":
 			txt = "3";
+			this.display+=txt;
 			break;
 		case "btn4":
 			txt = "4";
@@ -264,12 +256,11 @@ public class Basica implements Serializable {
 			this.display+= txt;
 			break;
 		case "btnclear":
-			txt = "0";
-			this.display+= 0;
+			txt = "";
+			this.display="";
 			break;
 		}
 		this.txt=txt;
-		this.display=txt;
 	}
 
 	//função de interface entre o cliente e o servidor
@@ -292,7 +283,6 @@ public class Basica implements Serializable {
 			pickHist.init(this.display);
 		}
 
-		this.setFirstdigit("true");
 	}
 
 	public String getDisplay() {
