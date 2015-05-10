@@ -1,11 +1,10 @@
 package pt.uc.dei.aor.paj;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import java.io.Serializable;
 
-@Named
-@RequestScoped
-public class Credenciais {
+public class Credenciais implements Serializable {
+
+	private static final long serialVersionUID = -3165509143034007614L;
 
 	private String username;
 
@@ -13,16 +12,31 @@ public class Credenciais {
 
 
 
-	public String getUsername() { return username; }
+	public Credenciais() {
+		super();
+		this.username = "";
+		this.password = "";
+	}
 
-	public void setUsername(String username) { this.username = username; }
+	public String getUsername() { 
+		return username; 
+	}
+
+	public void setUsername(String username) { 
+		this.username = username; 
+	}
 
 
 
-	public String getPassword() { return password; }
+	public String getPassword() { 
+		return password; 
+	}
 
-	public void setPassword(String password) { this.password = password; }
+	public void setPassword(String password) { 
+		this.password = password; 
+	}
 
 
 
 }
+

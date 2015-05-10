@@ -21,31 +21,35 @@ import org.primefaces.model.DualListModel;
 public class PickListView implements Serializable {
 	private static final long serialVersionUID = -1183677189929476404L;
 	
-	//private DualListModel<String> historico;
-	private List<String> hist;
-	//private List<String> selcecao;
 	
+	private ArrayList<String> hist;
+	private ArrayList<Double> tempo;
 
-	
 	@PostConstruct
 	public void init() {
 		hist = new ArrayList<String>();
-	//	selcecao = new ArrayList<String>();
-		hist.add(" ");   
-	//	historico = new DualListModel<String>(hist, selcecao);
-	
+		hist.add("");  
+		tempo=new ArrayList<Double>();
+		
 	}
 
 	public void init(String exp){
 		hist.add(exp);
-		//historico.setSource(hist);
 	}
 
-	public List<String> getHist() {
+	public ArrayList<String> getHist() {
 		return hist;
 	}
 
-	public void setHist(List<String> hist) {
-		this.hist = hist;
+	public void setHist(String exp) {
+		this.hist.add(exp);
 	} 
+	
+	public ArrayList<Double> getTempo() {
+		return tempo;
+	}
+
+	public void setTempo(double time) {
+		this.tempo.add(time);
+	}
 }

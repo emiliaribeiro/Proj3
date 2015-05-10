@@ -1,6 +1,7 @@
 package pt.uc.dei.aor.paj;
 
 import java.io.Serializable;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
@@ -23,6 +24,9 @@ public class Basica implements Serializable {
 	private String resultado;
 	private String txt;
 	private String panel1;
+	private double tempo_inicial;
+	private double tempo_final;  
+	private double diferencatempo;  
 	
 	public Basica() {
 		this.display = "";
@@ -49,12 +53,6 @@ public class Basica implements Serializable {
 		this.txt = txt;
 	}
 
-
-	//envio da expressão introduzida pelo utiliador para a classe estatística
-	public void setValor(String display) {
-		est.setResultado(display);
-	} 
-
 	//Getter e Setter associados à variável graus/radianos
 	public String getBtnradio() {
 		return btnradio;
@@ -65,7 +63,6 @@ public class Basica implements Serializable {
 
 	//botoes com ajax
 	public void keyAdd(AjaxBehaviorEvent event) {
-
 
 		switch (event.getComponent().getId()) {
 
@@ -265,21 +262,30 @@ public class Basica implements Serializable {
 	//função de interface entre o cliente e o servidor
 	public void btnequal() {
 		String aux, aux3;
-
+		this.tempo_inicial = System.nanoTime();
+		this.tempo_final = 0;  
+		this.diferencatempo=0;  
 		//envia o valor da expressão introduzida para efectuar o calculo
 		calc.setExp(this.display);
 		//o resultado toma o valor devolvido após calculo da expressao
+		this.tempo_final=System.nanoTime(); 
+		this.diferencatempo=(tempo_final-tempo_inicial)/1000;
 		this.resultado=calc.getExp();
-		this.display=this.resultado;
+		//this.display=this.resultado;
 
 		if (calc.isExpValida()){
 			//envia o valor da expressão introduzida para o historico
 			pickHist.init(this.display);
+			//envia o valor do tempo do cálculo da expressão para o histórico
+			pickHist.setTempo(this.diferencatempo);
 			//envio para os dados estatisticos
-			setValor(this.display);
+			est.setResultado(this.display);
+			this.display=this.resultado;
 		} else{
 			//envia o valor da expressão introduzida para o historico mas nao contabiliza na estatistica
 			pickHist.init(this.display);
+			//envia o valor do tempo do cálculo da expressão para o histórico
+			pickHist.setTempo(this.diferencatempo);
 		}
 
 	}

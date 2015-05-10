@@ -48,8 +48,7 @@
 							</tr>
 							<tr>
 
-								<f:ajax event="click" render="basicdisplay"
-									listener="#{basica.keyAdd}">
+								<f:ajax event="click" render="basicdisplay" listener="#{basica.keyAdd}">
 									<td style="width: 90px"><h:commandButton id="btn7"
 											styleClass="btn-numeric" value="7" /></td>
 
@@ -60,16 +59,21 @@
 									<td style="width: 90px"><h:commandButton id="btnplus"
 											class="btn-numeric" value="+" /></td>
 								</f:ajax>
-								
+
 
 
 
 								<td style="width: 90px" rowspan="2">
-								<f:ajax event="click" execute="btn-equal" render="basicdisplay" 
-								listener="#{basica.btnequal}" >
-										<h:commandButton id="btn-equal" class="btn-side" value="=" />
-									</f:ajax></td>
-
+								<f:ajax event="click" execute="btn-equal" render="basicdisplay horizontal"
+										listener="#{basica.btnequal}">
+										
+								<h:commandButton id="btn-equal" class="btn-side" value="=" />
+								</f:ajax></td>
+								
+								<f:ajax  execute="btn-refresh" render="basicdisplay horizontal"
+										listener="#{basica.btnequal}" >
+									<h:commandButton id="btn-refresh" style="display:none;" />
+								</f:ajax>	
 							</tr>
 
 							<tr>
