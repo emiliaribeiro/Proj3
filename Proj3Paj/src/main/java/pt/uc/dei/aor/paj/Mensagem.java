@@ -5,10 +5,11 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.enterprise.context.RequestScoped;
+
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-@RequestScoped
+@SessionScoped
 @Named
 public class Mensagem implements Serializable{
 
@@ -29,6 +30,7 @@ public class Mensagem implements Serializable{
 	}
 	public void setTxt(String txt) {
 		this.txt = txt;
+		setDate();
 	}
 	public String getDate() {
 		return this.date;

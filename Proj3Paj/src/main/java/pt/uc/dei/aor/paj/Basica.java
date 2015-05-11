@@ -275,7 +275,9 @@ public class Basica implements Serializable {
 
 		if (calc.isExpValida()){
 			//envia o valor da expressão introduzida para o historico
-			pickHist.init(this.display);
+			pickHist.setHist(this.display);
+			//envia o resultado do calculo da expressão para o historico
+			pickHist.setResultado(this.resultado);
 			//envia o valor do tempo do cálculo da expressão para o histórico
 			pickHist.setTempo(this.diferencatempo);
 			//envio para os dados estatisticos

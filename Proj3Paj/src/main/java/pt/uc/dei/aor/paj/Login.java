@@ -14,7 +14,7 @@ public class Login implements Serializable {
 	private static final long serialVersionUID = -2921010109456538382L;
 
 	@Inject Mensagem chat;
-	
+	@Inject Credenciais cred;
 
 	//Credenciais classe com o username e password do utilizador
 
@@ -25,7 +25,8 @@ public class Login implements Serializable {
 
 	//private int numTentativas;
 	private String user, password, mensagem;
-	//private boolean logged=false;
+	//variável auxiliar que vai ficar true quando o utilizador fica logado
+	private boolean isLogged=false;
 
 	//construtor cria a ArrayList dos utilizadores e acrescenta os dois por defeito
 	public Login() {
@@ -99,9 +100,10 @@ public class Login implements Serializable {
 				chat.setUtilizador(this.user);
 				this.user="";
 				this.password="";
-//				this.logged=true;
+				isLogged=true;
+				cred.setLogged(isLogged);
 //				this.numTentativas=0;
-				return "normal";
+				return "basic.xhtml";
 				
 			}else{
 			//	this.numTentativas++;
@@ -126,7 +128,7 @@ public class Login implements Serializable {
 			this.mensagem="Utilizador registado com sucesso!";
 			this.user="";
 			this.password="";
-			return "normal";
+			return "basic";
 			//this.logged=true;
 		}else{
 			this.mensagem="Utilizador já existente, escolha novo username";

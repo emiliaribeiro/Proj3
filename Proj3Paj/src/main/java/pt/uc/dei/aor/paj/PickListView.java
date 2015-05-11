@@ -24,13 +24,21 @@ public class PickListView implements Serializable {
 	
 	private ArrayList<String> hist;
 	private ArrayList<Double> tempo;
+	private ArrayList<String> resultado;
+
+	public ArrayList<String> getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado.add(resultado);
+	}
 
 	@PostConstruct
 	public void init() {
-		hist = new ArrayList<String>();
-		hist.add("");  
+		hist = new ArrayList<String>(); 
 		tempo=new ArrayList<Double>();
-		
+		resultado=new ArrayList<String>();
 	}
 
 	public void init(String exp){

@@ -3,12 +3,11 @@ package pt.uc.dei.aor.paj;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-import javax.enterprise.context.SessionScoped;
-
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 @Named
-@SessionScoped
+@ApplicationScoped
 public class ChatEntrada implements Serializable{
 
 	private static final long serialVersionUID = 6173082123788942581L;
@@ -37,7 +36,7 @@ public class ChatEntrada implements Serializable{
 
 	public void actualiza() {
 		
-		this.conversa.addLast(msg.getDate()+","+msg.getUtilizador()+":"+msg.getTxt());
+		this.conversa.addLast(msg.getDate()+" "+msg.getUtilizador()+":"+msg.getTxt());
 	}
 	
 	

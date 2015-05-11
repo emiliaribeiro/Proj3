@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+<title>Bem Vindo</title>
+
+<h:link rel="stylesheet" type="text/css" href="../resources/css/reset.css" />
+<h:link rel="stylesheet" type="text/css" href="../resources/css/structure.css" />
+</h:head>
+
+<h:body>
+	<h:form styleClass="box login">
+		<fieldset class="boxBody">
+			<h:form prependId="false">
+				<h:outputText type="text" tabindex="1" value="Utilizador: " />
+				<h:inputText type="text" tabindex="1" value="#{login.user}" id="idUsr" />
+				<br/>
+				<h:outputText type="password" tabindex="2" value="Password:" />
+				<h:inputSecret value="#{login.password}" id="idPsw" />
+				
+				<h:commandButton styleClass="btnLogin" tabindex="4" value="Login" action="#{login.logar}">
+					<f:ajax execute="idUsr idPsw" render="saidaLogin" />
+				</h:commandButton>
+				<br />
+				<h2>
+					<h:outputText value="#{login.mensagem}" id="saidaLogin" />
+				</h2>
+			</h:form>
+
+			
+		</fieldset>
+	
+	</h:form>
+	
+	<h2>Novo Utilizador</h2>
+				<br />
+				<h:form prependId="false">
+					<h:outputText value="Utilizador: " />
+					<h:inputText value="#{login.user}" id="novoUsr" />
+					<br />
+					<h:outputText value="Password:" />
+					<h:inputSecret value="#{login.password}" id="novaPsw" />
+					<h:commandButton value="Registar" action="#{login.novoUtilizador}">
+						<f:ajax execute="novoUsr novaPsw" render="registo" />
+					</h:commandButton>
+					<br />
+					<h2>
+						<h:outputText value="#{login.mensagem}" id="registo" />
+					</h2>
+				</h:form>
+				
+				<div class="errorMessage">
+					<h:messages showSummary="true" showDetail="false"
+						errorStyle="color: #d20005" infoStyle="color: blue" />
+				</div>
+			
+	
+</h:body>
+</html>

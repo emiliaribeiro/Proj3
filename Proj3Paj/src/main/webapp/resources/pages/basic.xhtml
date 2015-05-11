@@ -9,6 +9,8 @@
 <h:head>
 	<link rel="stylesheet" type="text/css" href="../css/calculator.css" />
 	<script src="../js/basic.js" />
+	
+
 </h:head>
 
 <h:body>
@@ -44,11 +46,12 @@
 									</p:selectOneRadio> <h:inputTextarea id="basicdisplay"
 										styleClass="txtareabasicdisplay"
 										title="Preencha aqui a sua expressao matemática"
-										value="#{basica.display}" rows="2" cols="49" /></th>
+										value="#{basica.display}" rows="2" cols="49" readonly="true" /></th>
 							</tr>
 							<tr>
 
-								<f:ajax event="click" render="basicdisplay" listener="#{basica.keyAdd}">
+								<f:ajax event="click" render="basicdisplay"
+									listener="#{basica.keyAdd}">
 									<td style="width: 90px"><h:commandButton id="btn7"
 											styleClass="btn-numeric" value="7" /></td>
 
@@ -63,17 +66,16 @@
 
 
 
-								<td style="width: 90px" rowspan="2">
-								<f:ajax event="click" execute="btn-equal" render="basicdisplay horizontal"
+								<td style="width: 90px" rowspan="2"><f:ajax event="click"
+										execute="btn-equal" render="basicdisplay horizontal basic"
 										listener="#{basica.btnequal}">
-										
-								<h:commandButton id="btn-equal" class="btn-side" value="=" />
-								</f:ajax></td>
-								
-								<f:ajax  execute="btn-refresh" render="basicdisplay horizontal"
-										listener="#{basica.btnequal}" >
+
+										<h:commandButton id="btn-equal" class="btn-side" value="=" />
+									</f:ajax></td>
+
+								<f:ajax execute="Refresh" render="horizontal">
 									<h:commandButton id="btn-refresh" style="display:none;" />
-								</f:ajax>	
+								</f:ajax>
 							</tr>
 
 							<tr>
@@ -193,9 +195,61 @@
 					</h:form>
 				</div>
 			</div>
+			<div class="ui-grid-col-3" id="painelHist">
 
+				<p:panel id="basic" header="Histórico de Operações"
+					footer="Clique na expressão para reutilizar"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="1" cellpadding="10">
+
+						<h:form>
+							<ul id="hist">
+								<ui:repeat id="showHist" value="#{pickListView.hist}" var="item">
+									<li>#{item}</li>
+								</ui:repeat>
+							</ul>
+						</h:form>
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="10">
+
+						<h:form>
+							<ul id="histRes">
+								<ui:repeat id="showRes" value="#{pickListView.resultado}"
+									var="item1">
+									<li>#{item1}</li>
+								</ui:repeat>
+							</ul>
+						</h:form>
+					</h:panelGrid>
+					<h:panelGrid columns="1" cellpadding="10">
+
+						<h:form>
+							<ul id="histTime">
+								<ui:repeat id="showTime" value="#{pickListView.tempo}"
+									var="item2">
+									<li>#{item2}</li>
+								</ui:repeat>
+							</ul>
+						</h:form>
+					</h:panelGrid>
+
+
+				</p:panel>
+			</div>
 		</div>
 	</div>
+	
+	<h:form prependId="false">
+	<div>
+		<h:outputText value="#{chatEntrada.conversa}" id="saidaConversa" />
+		</div>
+		<h:inputText value="#{mensagem.txt}" id="idTxt" />
+		<f:ajax event="click" execute="idTxt send" render="saidaConversa"
+			listener="#{chatEntrada.actualiza}">
+			<h:commandButton id="send" value="Send"></h:commandButton>
+		</f:ajax>
+
+	</h:form>
 
 </h:body>
 <footer> Projecto2 de PAJ realizado por Emília Ribeiro e Filipa
